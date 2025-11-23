@@ -1,0 +1,31 @@
+# Laravel-specific ignores
+/bootstrap/cache/*.php
+/storage/*.key
+/storage/app/public
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*.log
+/vendor
+.env
+.env.backup
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.phpunit.result.cache
+.vscode/
+
+# Vite-specific ignores
+/public/build
+/public/hot
+node_modules/
+
+# Operating System and Editor ignores
+.DS_Store
+ehthumbs.db
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace

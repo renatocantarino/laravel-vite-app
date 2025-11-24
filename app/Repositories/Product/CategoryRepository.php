@@ -10,7 +10,7 @@ class CategoryRepository implements ICategoryRepository
 {
     public function getAll(): Collection
     {
-        return Category::select('id', 'name', 'image')
+        return Category::select('id', 'name', 'image', 'icon')
                         ->orderBy('name', 'asc')
                         ->get();
     }

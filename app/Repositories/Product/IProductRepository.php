@@ -10,4 +10,6 @@ interface  IProductRepository
     public function getByCategory($id): Collection;
 
     public function getById($id): ?Product;
+    
+    public function getRelatedProducts(Product $product): Collection;
 }

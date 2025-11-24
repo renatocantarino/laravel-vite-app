@@ -59,6 +59,13 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        
+         'assets' => [
+        'driver' => 'local',
+        'root' => public_path('assets'),
+        'url' => env('APP_URL').'/assets',
+        'visibility' => 'public',
+    ],
 
     ],
 

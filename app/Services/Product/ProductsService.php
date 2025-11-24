@@ -28,4 +28,9 @@ class ProductsService implements IProductsService
             return $this->repository->getById($id);
         });
     }
+
+    public function getRelatedProducts(Product $product): Collection
+    {
+            return $this->repository->getRelatedProducts($product);
+    }
 }

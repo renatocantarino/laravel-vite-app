@@ -22,4 +22,12 @@ class ProductsRepository implements IProductRepository
     {
         return Product::where("id",$id)->first();
     }
+
+      public function getRelatedProducts(Product $product): Collection
+      {
+            return Product::select()
+                ->where('category_id', $product->category_id)
+                ->where('id', '!=', $product->id)                
+                ->get();
+      }
 }

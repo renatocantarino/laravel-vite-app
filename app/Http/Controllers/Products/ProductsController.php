@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use App\Services\Product\IProductsService;
+use App\Services\Product\ICategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -11,11 +12,13 @@ class ProductsController extends Controller
 {
 
     protected IProductsService $productService;
+    protected ICategoryService $categoryService;
 
-    public function __construct(IProductsService $productService)
+    public function __construct(IProductsService $productService, ICategoryService $categoryService)
     {
         $this->middleware('auth');
         $this->productService = $productService;
+        $this->categoryService = $categoryService;
     }
 
 
@@ -28,7 +31,13 @@ class ProductsController extends Controller
     public function singleProduct($id)
     {
         $product = $this->productService->getById($id);
-        return view('products.singleProduct',compact('product'));
+        $relatedProducts = $this->productService->getRelatedProducts($product);
+        return view('products.singleProduct',compact('product', 'relatedProducts'));
     }
-
+     
+    public function shop()
+    {
+        $categories = $this->categoryService->getAll();
+        return view('products.shop',compact('categories'));        
+    }
 }

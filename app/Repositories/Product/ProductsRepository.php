@@ -18,16 +18,29 @@ class ProductsRepository implements IProductRepository
 
     }
 
+    public function getAll($take): Collection
+    {
+        return Product::select()            
+                        ->orderBy('name', 'desc')
+                        ->take($take)
+                        ->get();
+
+
+    }
+
     public function getById($id): ?Product
     {
         return Product::where("id",$id)->first();
     }
 
-      public function getRelatedProducts(Product $product): Collection
-      {
+
+
+
+    public function getRelatedProducts(Product $product): Collection
+    {
             return Product::select()
                 ->where('category_id', $product->category_id)
                 ->where('id', '!=', $product->id)                
                 ->get();
-      }
+    }
 }

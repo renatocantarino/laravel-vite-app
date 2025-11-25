@@ -33,4 +33,9 @@ class ProductsService implements IProductsService
     {
             return $this->repository->getRelatedProducts($product);
     }
+    
+    public function getAll($take): Collection
+    {       
+        return $this->repository->getAll($take);        
+    }
 }

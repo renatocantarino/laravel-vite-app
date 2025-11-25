@@ -38,6 +38,8 @@ class ProductsController extends Controller
     public function shop()
     {
         $categories = $this->categoryService->getAll();
-        return view('products.shop',compact('categories'));        
+        $most = $this->productService->getAll(5);
+        
+        return view('products.shop',compact('categories','most'));        
     }
 }

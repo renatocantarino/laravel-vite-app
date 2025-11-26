@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface  IProductRepository
 {
-    public function getByCategory($id): Collection;
+    public function getByCategory($id, $take): Collection;
 
     public function getAll($take): Collection;
 

@@ -8,14 +8,17 @@ use Illuminate\Database\Eloquent\Collection;
 class ProductsRepository implements IProductRepository
 {
 
-    public function getByCategory($id): Collection
+    public function getByCategory($id,$take): Collection
     {
-        return Product::select()
+        $query = Product::select()
             ->where('category_id', $id)
-            ->orderBy('name', 'asc')
-            ->get();
+            ->orderBy('name', 'asc');
 
+        if($take>0){
+            $query->take($take);
+        }
 
+         return $query->get();
     }
 
     public function getAll($take): Collection

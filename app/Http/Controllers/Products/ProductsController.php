@@ -14,6 +14,14 @@ class ProductsController extends Controller
     protected IProductsService $productService;
     protected ICategoryService $categoryService;
 
+    private const CATEGORY_ID_MEATS = 8;
+    private const CATEGORY_ID_FISH = 5;
+    private const CATEGORY_ID_FROZEN = 6;
+    private const CATEGORY_ID_VEGS = 9;
+
+    // Constante para limite padrão de produtos por categoria
+    private const DEFAULT_LIMIT_PER_CATEGORY = 5;
+
     public function __construct(IProductsService $productService, ICategoryService $categoryService)
     {
         $this->middleware('auth');
@@ -40,6 +48,11 @@ class ProductsController extends Controller
         $categories = $this->categoryService->getAll();
         $most = $this->productService->getAll(5);
         
-        return view('products.shop',compact('categories','most'));        
+        $meatsprods = $this->productService->getByCategory(self::CATEGORY_ID_MEATS,self::DEFAULT_LIMIT_PER_CATEGORY);
+        $fishprods = $this->productService->getByCategory(self::CATEGORY_ID_FISH,self::DEFAULT_LIMIT_PER_CATEGORY);
+        $frozenprods = $this->productService->getByCategory(self::CATEGORY_ID_FROZEN,self::DEFAULT_LIMIT_PER_CATEGORY);
+        $vegsprods = $this->productService->getByCategory(self::CATEGORY_ID_VEGS,self::DEFAULT_LIMIT_PER_CATEGORY);
+                
+        return view('products.shop',compact('categories','most','meatsprods'));        
     }
 }

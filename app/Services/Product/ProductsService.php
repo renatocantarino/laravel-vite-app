@@ -15,10 +15,10 @@ class ProductsService implements IProductsService
     {
         $this->repository = $repository;
     }
-    public function getByCategory($id): Collection
+    public function getByCategory($id, $take=0): Collection
     {
-        return Cache::remember('prod_category_'.$id, 3600, function() use ($id) {
-            return $this->repository->getByCategory($id);
+        return Cache::remember('prod_category_'.$id, 3600, function() use ($id, $take) {
+            return $this->repository->getByCategory($id,$take);
         });
     }
 
@@ -37,5 +37,5 @@ class ProductsService implements IProductsService
     public function getAll($take): Collection
     {       
         return $this->repository->getAll($take);        
-    }
+    }   
 }

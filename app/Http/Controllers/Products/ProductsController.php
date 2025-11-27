@@ -16,7 +16,7 @@ class ProductsController extends Controller
 
     private const CATEGORY_ID_MEATS = 8;
     private const CATEGORY_ID_FISH = 5;
-    private const CATEGORY_ID_FROZEN = 6;
+    private const CATEGORY_ID_FROZEN = 10;
     private const CATEGORY_ID_VEGS = 9;
 
     // Constante para limite padrão de produtos por categoria
@@ -47,12 +47,20 @@ class ProductsController extends Controller
     {
         $categories = $this->categoryService->getAll();
         $most = $this->productService->getAll(5);
+
+        //dump($most); 
         
         $meatsprods = $this->productService->getByCategory(self::CATEGORY_ID_MEATS,self::DEFAULT_LIMIT_PER_CATEGORY);
         $fishprods = $this->productService->getByCategory(self::CATEGORY_ID_FISH,self::DEFAULT_LIMIT_PER_CATEGORY);
         $frozenprods = $this->productService->getByCategory(self::CATEGORY_ID_FROZEN,self::DEFAULT_LIMIT_PER_CATEGORY);
         $vegsprods = $this->productService->getByCategory(self::CATEGORY_ID_VEGS,self::DEFAULT_LIMIT_PER_CATEGORY);
                 
-        return view('products.shop',compact('categories','most','meatsprods'));        
+        return view('products.shop',
+                    compact('categories','most','meatsprods','fishprods','frozenprods','vegsprods'));        
+    }
+
+    public function addToCart(Request $request)
+    {
+        dump($request->all());
     }
 }

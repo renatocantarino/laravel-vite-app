@@ -12,6 +12,10 @@ class Category extends Model
     protected $table = 'categories';
     protected $fillable = ['name', 'image', "icon"];
 
-
     public $timestamps = true;
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

@@ -28,4 +28,10 @@ class Cart extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     public $timestamps = true;
+
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

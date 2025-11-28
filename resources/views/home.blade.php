@@ -148,7 +148,7 @@
                 @foreach($categories as $item)
                   <div class="item">
                     <div class="card rounded-0 border-0 text-center">
-                        <img src="  {{ asset('assets/img/'.$item->image.'.jpg') }} "  alt="{{ $item->name }}">
+                        <img src="  {{ asset('assets/img/'.$item->image) }} "  alt="{{ $item->name }}">
                         <div class="card-img-overlay d-flex align-items-center justify-content-center">                            
                             <a href="{{route('single.category',$item->id)}}" class="btn btn-primary btn-lg">{{$item->name}}</a>
                         </div>

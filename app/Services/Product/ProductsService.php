@@ -2,7 +2,9 @@
 
 namespace App\Services\Product;
 
+use App\Models\Product\Cart;
 use App\Models\Product\Product;
+use App\Repositories\Product\ICartRepository;
 use App\Repositories\Product\IProductRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -33,9 +35,9 @@ class ProductsService implements IProductsService
     {
             return $this->repository->getRelatedProducts($product);
     }
-    
+
     public function getAll($take): Collection
-    {       
-        return $this->repository->getAll($take);        
-    }   
+    {
+        return $this->repository->getAll($take);
+    }
 }

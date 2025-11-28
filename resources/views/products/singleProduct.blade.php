@@ -20,7 +20,7 @@
                     <div class="col-sm-6">
                         <div class="slider-zoom">
                             <a href="{{asset('assets/img/'.$product->image.'')}}" class="cloud-zoom" rel="transparentImage: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', useWrapper: false, showTitle: false, zoomWidth:'500', zoomHeight:'500', adjustY:0, adjustX:10" id="cloudZoom">
-                                <img alt="Detail Zoom thumbs image" src="{{asset('assets/img/'.$product->image.'')}}" style="width: 100%;">
+                                <img alt="Detail Zoom thumbs image" src="{{asset('assets/img/'.$product->image)}}" style="width: 100%;">
                             </a>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         </p>
                         <div class="row">
                             <div class="col-sm-6">
-                                <p>                                    
+                                <p>
                                     <span class="price">R$ {{number_format($product->price,2,',','.')}}</span>
                                     <span class="old-price">R$ {{ number_format($product->price + 30, 2, ',', '.') }}</span>
                                 </p>
@@ -46,16 +46,25 @@
                         <p class="mb-1">
                             <strong>Quantity</strong>
                         </p>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <input class="form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="1" name="vertical-spin">
-                            </div>
-                            <div class="col-sm-6"><span class="pt-1 d-inline-block">Pack (1000 gram)</span></div>
-                        </div>
 
-                        <button class="mt-3 btn btn-primary btn-lg">
-                            <i class="fa fa-shopping-basket"></i> Add to Cart
-                        </button>
+                        <form method="POST" action="{{ route('products.add.cart') }}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <input class="form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="1" name="vertical-spin">
+                                </div>
+                                <div class="col-sm-6"><span class="pt-1 d-inline-block">Pack (1000 gram)</span></div>
+                            </div>
+
+                            <input name="name" value="{{$product->name}}" type="hidden">
+                            <input name="price" value="{{$product->price}}" type="hidden">
+                            <input name="prod_id" value="{{$product->id}}" type="hidden">
+                            <input name="image" value="{{$product->image}}" type="hidden">
+
+                            <button name="submit" type="submit" class="mt-3 btn btn-primary btn-lg">
+                                <i class="fa fa-shopping-basket"></i> Add to Cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -78,7 +87,7 @@
                                     </div>
                                     <div class="card-badge">
                                         <div class="card-badge-container left">
-                                            
+
                                             <span class="badge badge-primary">
                                                 20% OFF
                                             </span>
@@ -102,10 +111,10 @@
                                 </div>
                             </div>
                             @endforeach
-                        </div>                                
+                        </div>
                         @else
-                          <center><a class="alert alert-success">No related products found</a></center>    
-                        @endif                        
+                          <center><a class="alert alert-success">No related products found</a></center>
+                        @endif
                     </div>
                 </div>
             </div>

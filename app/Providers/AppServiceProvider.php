@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\Product\CartRepository;
+use App\Repositories\Product\ICartRepository;
 use App\Repositories\Product\IProductRepository;
 use App\Repositories\Product\ProductsRepository;
+use App\Services\Product\CartService;
+use App\Services\Product\ICartService;
 use App\Services\Product\IProductsService;
 use App\Services\Product\ProductsService;
 use Illuminate\Support\ServiceProvider;
@@ -21,10 +25,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(ICategoryRepository::class, CategoryRepository::class);
         $this->app->bind(IProductRepository::class, ProductsRepository::class);
+        $this->app->bind(ICartRepository::class, CartRepository::class);
 
         // Service bindings
         $this->app->bind(ICategoryService::class, CategoryService::class);
         $this->app->bind(IProductsService::class, ProductsService::class);
+        $this->app->bind(ICartService::class, CartService::class);
     }
 
     /**

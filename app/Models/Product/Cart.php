@@ -9,9 +9,27 @@ class Cart extends Model
 {
     use HasFactory;
 
+
+    /**
+     * @var mixed|string
+     */
+    public mixed $cart_id;
     protected $table = 'cart';
-    protected $fillable = ['name', 'image', "price", "quantity", "user_id", "product_id"];
+    protected $fillable = [
+        'cart_id',
+        'name',
+        'image',
+        'price',
+        'qty',
+        'prod_id',
+        'user_id',
+        'subtotal'
+    ];
 
 
+
+    protected $primaryKey = 'cart_id';
+    protected $keyType = 'string';
+    public $incrementing = false;
     public $timestamps = true;
 }

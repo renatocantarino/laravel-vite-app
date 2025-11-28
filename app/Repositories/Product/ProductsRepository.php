@@ -2,8 +2,10 @@
 
 namespace App\Repositories\Product;
 
+use App\Models\Product\Cart;
 use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Collection;
+
 
 class ProductsRepository implements IProductRepository
 {
@@ -23,7 +25,7 @@ class ProductsRepository implements IProductRepository
 
     public function getAll($take): Collection
     {
-        return Product::select()            
+        return Product::select()
                         ->orderBy('name', 'desc')
                         ->take($take)
                         ->get();
@@ -43,7 +45,7 @@ class ProductsRepository implements IProductRepository
     {
             return Product::select()
                 ->where('category_id', $product->category_id)
-                ->where('id', '!=', $product->id)                
+                ->where('id', '!=', $product->id)
                 ->get();
     }
 }

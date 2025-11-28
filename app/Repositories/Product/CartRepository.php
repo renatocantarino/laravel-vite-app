@@ -2,9 +2,11 @@
 
 namespace App\Repositories\Product;
 
+use App\Models\Product\Cart;
+
 class CartRepository implements ICartRepository
 {
-    public function Add($cart): Cart
+    public function add($cart): Cart
     {
         return Cart::create($cart);
     }

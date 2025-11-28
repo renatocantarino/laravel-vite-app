@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Products;
 use App\Http\Controllers\Controller;
 use App\Services\Product\IProductsService;
 use App\Services\Product\ICategoryService;
+use App\Services\Product\ICartService;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -13,6 +15,7 @@ class ProductsController extends Controller
 
     protected IProductsService $productService;
     protected ICategoryService $categoryService;
+    protected ICartService $cartService;
 
     private const CATEGORY_ID_MEATS = 8;
     private const CATEGORY_ID_FISH = 5;
@@ -22,11 +25,14 @@ class ProductsController extends Controller
     // Constante para limite padrão de produtos por categoria
     private const DEFAULT_LIMIT_PER_CATEGORY = 5;
 
-    public function __construct(IProductsService $productService, ICategoryService $categoryService)
+    public function __construct(IProductsService $productService, 
+                                ICategoryService $categoryService,
+                                ICartService $cartService)
     {
         $this->middleware('auth');
-        $this->productService = $productService;
+        $this->productService  = $productService;
         $this->categoryService = $categoryService;
+        $this->cartService     = $cartService;
     }
 
 
@@ -62,5 +68,7 @@ class ProductsController extends Controller
     public function addToCart(Request $request)
     {
         dump($request->all());
+
+        $addedCart = $this->cartService->addToCart($request->all());
     }
 }

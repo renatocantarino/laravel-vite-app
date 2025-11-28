@@ -4,7 +4,6 @@ namespace App\Services\Product;
 
 use App\Models\Product\Cart;
 use App\Repositories\Product\ICartRepository;
-use Illuminate\Support\Str;
 
 class CartService implements ICartService
 {
@@ -16,8 +15,8 @@ class CartService implements ICartService
     }
 
     public function add(Cart $cart): Cart
-    {
-        $cart->cart_id= Str::uuid()->toString();
+    {      
+        dd($cart);  
         return $this->cartRepository->add($cart);
     }
 }

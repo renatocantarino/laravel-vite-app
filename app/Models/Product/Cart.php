@@ -4,15 +4,13 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\GenerateGuid;
 
 class Cart extends Model
 {
     use HasFactory;
-
-
-    /**
-     * @var mixed|string
-     */
+    use GenerateGuid;
+    
     public mixed $cart_id;
     protected $table = 'cart';
     protected $fillable = [
@@ -25,8 +23,6 @@ class Cart extends Model
         'user_id',
         'subtotal'
     ];
-
-
 
     protected $primaryKey = 'cart_id';
     protected $keyType = 'string';

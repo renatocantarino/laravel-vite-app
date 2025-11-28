@@ -47,11 +47,11 @@
                             <strong>Quantity</strong>
                         </p>
 
-                        <form method="POST" action="{{ route('products.add.cart') }}">
+                        <form method="POST" action="{{ route('cart.add') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <input class="form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="1" name="vertical-spin">
+                                <input name="qty" class="form-control" type="number" min="1" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="1" name="vertical-spin">
                                 </div>
                                 <div class="col-sm-6"><span class="pt-1 d-inline-block">Pack (1000 gram)</span></div>
                             </div>

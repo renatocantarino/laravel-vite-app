@@ -4,14 +4,14 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\GenerateGuid;
+use App\Traits\GenerateGuid; // Certifique-se de que este trait está configurado corretamente para gerar o UUID
 
 class Cart extends Model
 {
     use HasFactory;
     use GenerateGuid;
-    
-    public mixed $cart_id;
+   
+   
     protected $table = 'cart';
     protected $fillable = [
         'cart_id',
@@ -32,6 +32,6 @@ class Cart extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'prod_id'); // Ajuste a chave estrangeira se necessário
     }
 }

@@ -35,7 +35,7 @@ class CartService implements ICartService
         return CartDto::fromModel($cartCreated);
     }
 
-     public function addItem($cartId,Request  $request): CartItemDto
+    public function addItem($cartId,Request  $request): CartItemDto
      {
 
           $cartItem = new CartItem([
@@ -52,23 +52,31 @@ class CartService implements ICartService
 
         $itemAdded= $this->cartRepository->addItem($cartItem);
         return CartItemDto::fromModel($itemAdded);
-     }
+  
+  }
 
-    public function getByUserIdWithItems(int $userId): Collection
+    public function getByUserIdWithItems(int $userId): CartDto
     {
-        return $this->cartRepository->getByUserId($userId)
-            ->map(fn ($cart) => CartDto::fromModel($cart))
-            ->values();
+        $cartWithItens = $this->cartRepository->getByUserIdWithItems($userId);        
+        return CartDto::fromModel($cartWithItens);            
     }
 
     public function countByUserId(int $userId): int
     {
         return $this->cartRepository->countByUserId($userId);
     }
-    // public function remove(int $id): bool
-    // {
-    //     return $this->cartRepository->remove($id);
-    // }
+
+    public function remove(int $userId, int $idProduct): bool
+    {
+        
+        $deleted = $this->cartRepository->remove($id);
+        Cache::forget("cart_count_user_{$userId}");
+
+        return $deleted;
+
+
+    }
+
     // public function checkout(CartDto $cartDto): CartDto
     // {                
     //    $closedCart = CartDto::toModel($cartDto);

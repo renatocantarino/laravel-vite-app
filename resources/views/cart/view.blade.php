@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                @if($cartProducts->count() > 0)
+                @if(count($cartProducts->cartItems) > 0)
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -44,7 +44,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($cartProducts as $item)
+                                @foreach ($cartProducts->cartItems as $item)
                                 <tr>
                                     <td>                                            
                                        <img src="{{ asset('assets/img/'.$item->image) }}" alt="{{ $item->name }}" width="60">
@@ -83,11 +83,11 @@
                         </div>
                         <div class="col text-right">
                             <div class="clearfix"></div>
-                            <h6 class="mt-3">Total: R$ {{ $sums }}</h6>
+                            <h6 class="mt-3">Total: R$ {{ $cartProducts->subtotal }}</h6>
 
                             <form action="{{ route('cart.checkout') }}" method="POST" class="d-inline">
                                 @csrf
-                                <input type="hidden" name="total_amount" value="{{ $sums }}" type="hidden">  
+                                <input type="hidden" name="total_amount" value="{{ $cartProducts->subtotal }}" type="hidden">  
                                 <button type="submit" class="btn btn-lg btn-primary">Checkout</button>                       
                             </form>                         
                         </div>

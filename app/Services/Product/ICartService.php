@@ -16,11 +16,11 @@ interface ICartService
 
     public function addItem($cartId,Request  $request): CartItemDto;
 
-    public function getByUserIdWithItems(int $userId): Collection;
+    public function getByUserIdWithItems(int $userId): CartDto;
 
     public function countByUserId(int $userId): int;
 
-    //public function remove(int $id): bool;
+    public function remove(int $userId, int $idProduct): bool;
 
     //public function checkout(CartDto $cart): CartDto;
 }

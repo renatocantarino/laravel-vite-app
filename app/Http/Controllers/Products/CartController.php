@@ -22,8 +22,8 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        $userId = Auth::user()->id;
-        $request->merge(['user_id' =>$userId]);
+        
+        $request->merge(['user_id' =>$this->getLoggerUserId()]);
 
         $cartCreated = $this->cartService->create($request);        
         $itemAdded = $this->cartService->addItem($cartCreated->id, $request);      
@@ -33,16 +33,13 @@ class CartController extends Controller
 
     public function viewCart()
     {
-        $cartProducts = $this->cartService->getByUserId(Auth::user()->id);
-        $sums = $cartProducts->sum('subtotal');
-
-
-        return view('cart.view', compact('cartProducts', 'sums'));
+        $cartProducts = $this->cartService->getByUserIdWithItems($this->getLoggerUserId());        
+        return view('cart.view', compact('cartProducts'));
     }
 
-    public function removeFromCart(int $id)
-    {
-        $this->cartService->remove($id);
+    public function removeFromCart(int $idProduct)
+    {        
+        $this->cartService->remove($this->getLoggerUserId(),$idProduct);
         return Redirect::route('cart.view')->with(['success' => 'Product removed from cart  successfully']);
     }
 

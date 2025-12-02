@@ -19,19 +19,20 @@ class CartComposer
     public function compose(View $view)
     {
         $countCartItems = 0;
+        $userName = '';
 
         if (Auth::check()) {
-            $userId = Auth::id();
-
-            // Chave única para o cache do carrinho do usuário
+            $userId = Auth::id();            
             $cacheKey = "cart_count_user_{$userId}";
-
-            // Obter ou armazenar o valor em cache
+            $userName = Auth::user()->name;  
+                        
             $countCartItems = Cache::remember($cacheKey, 3600, function () use ($userId) {
                 return $this->cartService->countByUserId($userId);
             });
         }
 
-        $view->with('countCartItems', $countCartItems);
+       $view->with([
+                    'countCartItems' => $countCartItems,
+                    'userName' => $userName]);
     }
 }

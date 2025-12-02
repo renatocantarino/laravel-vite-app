@@ -52,7 +52,7 @@ class CartRepository implements ICartRepository
         Cart::where('cart_id', $cartId)->update(['subtotal' => $total]);
     }
 
-    public function getByUserIdWithItems(int $userId): Collection
+    public function getByUserIdWithItems(int $userId): Cart
     {
         return Cart::where('user_id', $userId)
                ->where('status', 'open')
@@ -76,10 +76,10 @@ class CartRepository implements ICartRepository
     }
 
 
-    // public function remove(int $id): bool
-    // {
-    //     return Cart::where('id', $id)->delete() > 0;
-    // }
+    public function remove(int $id): bool
+    {
+        return CartItem::where('id', $id)->delete() > 0;
+    }
 
     // public function checkout(Cart $cart): Cart
     // {

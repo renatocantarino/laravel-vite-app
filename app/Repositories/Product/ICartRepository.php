@@ -13,7 +13,7 @@ interface  ICartRepository
 
     public function addItem(CartItem $item): CartItem;
 
-    // public function remove(int $id): bool;
+    public function remove(int $idProduct): bool;
 
     // public function checkout(Cart $cart): Cart;
 
@@ -21,7 +21,7 @@ interface  ICartRepository
 
      public function getCartOpenById(int $userId): ?Cart;
 
-     public function getByUserIdWithItems(int $userId): Collection;
+     public function getByUserIdWithItems(int $userId): Cart;
 
     // public function update(int $id, array $data): bool;
 

@@ -51,8 +51,7 @@ class ProductsController extends Controller
         $categories = $this->categoryService->getAll();
         $most = $this->productService->getAll(5);
 
-        //dump($most);
-
+        
         $meatsprods = $this->productService->getByCategory(self::CATEGORY_ID_MEATS,self::DEFAULT_LIMIT_PER_CATEGORY);
         $fishprods = $this->productService->getByCategory(self::CATEGORY_ID_FISH,self::DEFAULT_LIMIT_PER_CATEGORY);
         $frozenprods = $this->productService->getByCategory(self::CATEGORY_ID_FROZEN,self::DEFAULT_LIMIT_PER_CATEGORY);

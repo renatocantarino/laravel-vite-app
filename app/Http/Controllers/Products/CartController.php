@@ -45,6 +45,7 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        return view('cart.checkout');
+        $cartProducts = $this->cartService->getByUserIdWithItems($this->getLoggerUserId());       
+        return view('cart.checkout', compact('cartProducts'));
     }
 }

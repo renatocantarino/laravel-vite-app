@@ -24,7 +24,6 @@ class CategoryService implements ICategoryService
         ttl: 3600,
         callback: fn (): Collection => $this->repository->getAll()            
             ->map(fn ($category) => CategoryDTO::fromModel($category))
-            ->values() 
-    );
+            ->values());
     }
 }

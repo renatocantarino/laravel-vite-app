@@ -58,7 +58,7 @@ class CartService implements ICartService
     public function getByUserIdWithItems(int $userId): CartDto
     {
         $cartWithItens = $this->cartRepository->getByUserIdWithItems($userId);        
-        return CartDto::fromModel($cartWithItens);            
+        return CartDto::fromModel($cartWithItens);           
     }
 
     public function countByUserId(int $userId): int

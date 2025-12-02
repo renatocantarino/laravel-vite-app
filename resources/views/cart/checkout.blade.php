@@ -70,48 +70,46 @@
                                     <thead>
                                         <tr>
                                             <th>Products</th>
+                                             <th class="text-right">Unit</th>
                                             <th class="text-right">Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        @foreach ($cartProducts->cartItems as $item)
+                                             <tr>
                                             <td>
-                                                Ikan Segar x1
+                                                {{$item->name  }} x {{ $item->qty }}
+                                            </td>
+                                             <td class="text-right">
+                                               {{$item->price  }}
                                             </td>
                                             <td class="text-right">
-                                                Rp 30.000
+                                               {{$item->subtotal  }}
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Sirloin x1
-                                            </td>
-                                            <td class="text-right">
-                                                Rp 120.000
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Mix Vegetables x1
-                                            </td>
-                                            <td class="text-right">
-                                                Rp 30.000
-                                            </td>
-                                        </tr>
+                                        </tr>      
+                                        @endforeach                                        
+                                                                      
                                     </tbody>
                                     <tfooter>
                                         <tr>
                                             <td>
                                                 <strong>Cart Subtotal</strong>
                                             </td>
+                                             <td class="text-right">
+                                               
+                                            </td>
+                                            
                                             <td class="text-right">
-                                                Rp 180.000
+                                                {{ $cartProducts->subtotal }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <strong>Shipping</strong>
                                             </td>
+                                            <td class="text-right"></td>
+
+
                                             <td class="text-right">
                                                 Rp 20.000
                                             </td>
@@ -120,8 +118,9 @@
                                             <td>
                                                 <strong>ORDER TOTAL</strong>
                                             </td>
+                                            <td class="text-right"></td>
                                             <td class="text-right">
-                                                <strong>Rp 200.000</strong>
+                                                <strong> {{ $cartProducts->subtotal +25 }}</strong>
                                             </td>
                                         </tr>
                                     </tfooter>

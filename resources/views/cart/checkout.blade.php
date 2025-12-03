@@ -25,7 +25,7 @@
                             <fieldset>
                                 <div class="form-group row">
                                     <div class="col">
-                                        <input class="form-control" placeholder="Name" type="text">
+                                        <input class="form-control" value="{{ $userInfo['name'] }}" placeholder="Name" type="text" readonly>
                                     </div>
                                     <div class="col">
                                         <input class="form-control" placeholder="Last Name" type="text">
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col">
-                                        <input class="form-control" placeholder="Email Address" type="email">
+                                        <input class="form-control" value="{{ $userInfo['email'] }}" placeholder="Email Address" type="email" readonly>
                                     </div>
                                     <div class="col">
                                         <input class="form-control" placeholder="Phone Number" type="tel">
@@ -111,7 +111,7 @@
 
 
                                             <td class="text-right">
-                                                Rp 20.000
+                                               {{ $cartProducts->tax}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -120,7 +120,7 @@
                                             </td>
                                             <td class="text-right"></td>
                                             <td class="text-right">
-                                                <strong> {{ $cartProducts->subtotal +25 }}</strong>
+                                                <strong> {{ $cartProducts->cartTotal}}</strong>
                                             </td>
                                         </tr>
                                     </tfooter>

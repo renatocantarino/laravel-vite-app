@@ -11,9 +11,18 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    protected function getLoggerUserId() : ?int
-    {
-        $user = Auth::id();
-        return $user ? $user : null;
+    protected function getLoggerUserInfo(): ?array
+{
+    $user = Auth::user();
+    
+    if (!$user) {
+        return null;
     }
+
+    return [
+        'id' => $user->id,
+        'name' => $user->name,
+        'email' => $user->email,        
+    ];
+}
 }

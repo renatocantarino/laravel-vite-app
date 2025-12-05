@@ -20,4 +20,3 @@ Route::get('cart', [App\Http\Controllers\Products\CartController::class, 'viewCa
 Route::delete('cart/remove/{id}', [App\Http\Controllers\Products\CartController::class, 'removeFromCart'])->name('cart.remove');
 
 Route::post('cart/prepare-checkout', [App\Http\Controllers\Products\CartController::class, 'checkout'])->name('cart.checkout');
-

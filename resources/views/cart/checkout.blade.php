@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-  <div id="page-content" class="page-content">
+    <div id="page-content" class="page-content">
         <div class="banner">
-             <div class="jumbotron jumbotron-bg text-center rounded-0" style="margin-top: -25px;background-image: url('{{asset('assets/img/bg-header.jpg')}}');">
+            <div class="jumbotron jumbotron-bg text-center rounded-0"
+                style="margin-top: -25px;background-image: url('{{asset('assets/img/bg-header.jpg')}}');">
                 <div class="container">
                     <h1 class="pt-5">
                         Checkout
@@ -25,7 +26,8 @@
                             <fieldset>
                                 <div class="form-group row">
                                     <div class="col">
-                                        <input class="form-control" value="{{ $userInfo['name'] }}" placeholder="Name" type="text" readonly>
+                                        <input class="form-control" value="{{ $userInfo['name'] }}" placeholder="Name"
+                                            type="text" readonly>
                                     </div>
                                     <div class="col">
                                         <input class="form-control" placeholder="Last Name" type="text">
@@ -48,13 +50,14 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col">
-                                        <input class="form-control" value="{{ $userInfo['email'] }}" placeholder="Email Address" type="email" readonly>
+                                        <input class="form-control" value="{{ $userInfo['email'] }}"
+                                            placeholder="Email Address" type="email" readonly>
                                     </div>
                                     <div class="col">
                                         <input class="form-control" placeholder="Phone Number" type="tel">
                                     </div>
                                 </div>
-                              
+
                                 <div class="form-group">
                                     <textarea class="form-control" placeholder="Order Notes"></textarea>
                                 </div>
@@ -70,35 +73,35 @@
                                     <thead>
                                         <tr>
                                             <th>Products</th>
-                                             <th class="text-right">Unit</th>
+                                            <th class="text-right">Unit</th>
                                             <th class="text-right">Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($cartProducts->cartItems as $item)
-                                             <tr>
-                                            <td>
-                                                {{$item->name  }} x {{ $item->qty }}
-                                            </td>
-                                             <td class="text-right">
-                                               {{$item->price  }}
-                                            </td>
-                                            <td class="text-right">
-                                               {{$item->subtotal  }}
-                                            </td>
-                                        </tr>      
-                                        @endforeach                                        
-                                                                      
+                                            <tr>
+                                                <td>
+                                                    {{$item->name  }} x {{ $item->qty }}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{$item->price  }}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{$item->subtotal  }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                     <tfooter>
                                         <tr>
                                             <td>
                                                 <strong>Cart Subtotal</strong>
                                             </td>
-                                             <td class="text-right">
-                                               
+                                            <td class="text-right">
+
                                             </td>
-                                            
+
                                             <td class="text-right">
                                                 {{ $cartProducts->subtotal }}
                                             </td>
@@ -111,7 +114,7 @@
 
 
                                             <td class="text-right">
-                                               {{ $cartProducts->tax}}
+                                                {{ $cartProducts->tax}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -127,16 +130,17 @@
                                 </table>
                             </div>
 
-                         
+
                         </div>
                         <p class="text-right mt-3">
-                            <input checked="" type="checkbox"> I’ve read &amp; accept the <a href="#">terms &amp; conditions</a>
+                            <input checked="" type="checkbox"> I’ve read &amp; accept the <a href="#">terms &amp;
+                                conditions</a>
                         </p>
                         <a href="#" class="btn btn-primary float-right">PROCEED TO CHECKOUT <i class="fa fa-check"></i></a>
                         <div class="clearfix">
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection

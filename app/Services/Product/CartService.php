@@ -8,8 +8,6 @@ use App\Dtos\CartDto;
 use App\Dtos\CartItemDto;
 use App\Repositories\Product\ICartRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection; 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 
 
@@ -25,20 +23,20 @@ class CartService implements ICartService
     public function create(Request $request): CartDto
     {
 
-        $cartRequest = new Cart([                       
+        $cartRequest = new Cart([
             "user_id" => $request->user_id,
             "subtotal" => $request->qty * $request->price,
             "status" => 'open'
         ]);
 
-        $cartCreated = $this->cartRepository->create($cartRequest);   
+        $cartCreated = $this->cartRepository->create($cartRequest);
         return CartDto::fromModel($cartCreated);
     }
 
-    public function addItem($cartId,Request  $request): CartItemDto
-     {
+    public function addItem($cartId, Request $request): CartItemDto
+    {
 
-          $cartItem = new CartItem([
+        $cartItem = new CartItem([
             "cart_id" => $cartId,
             "name" => $request->name,
             "price" => $request->price,
@@ -47,18 +45,18 @@ class CartService implements ICartService
             "prod_id" => $request->prod_id,
             "subtotal" => $request->qty * $request->price
         ]);
-                
+
         Cache::forget("cart_count_user_{$request->userId}");
 
-        $itemAdded= $this->cartRepository->addItem($cartItem);
+        $itemAdded = $this->cartRepository->addItem($cartItem);
         return CartItemDto::fromModel($itemAdded);
-  
-  }
+
+    }
 
     public function getByUserIdWithItems(int $userId): CartDto
     {
-        $cartWithItens = $this->cartRepository->getByUserIdWithItems($userId);        
-        return CartDto::fromModel($cartWithItens);           
+        $cartWithItens = $this->cartRepository->getByUserIdWithItems($userId);
+        return CartDto::fromModel($cartWithItens);
     }
 
     public function countByUserId(int $userId): int
@@ -68,8 +66,8 @@ class CartService implements ICartService
 
     public function remove(int $userId, int $idProduct): bool
     {
-        
-        $deleted = $this->cartRepository->remove($id);
+
+        $deleted = $this->cartRepository->remove($idProduct);
         Cache::forget("cart_count_user_{$userId}");
 
         return $deleted;

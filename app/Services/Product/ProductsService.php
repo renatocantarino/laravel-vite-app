@@ -3,7 +3,6 @@
 namespace App\Services\Product;
 
 use App\Dtos\ProductDto;
-use App\Models\Product\Product;
 use App\Repositories\Product\IProductRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;

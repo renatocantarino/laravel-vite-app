@@ -4,7 +4,7 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\GenerateGuid; // Certifique-se de que este trait está configurado corretamente para gerar o UUID
+use App\Traits\GenerateGuid; 
 
 class CartItem extends Model
 {

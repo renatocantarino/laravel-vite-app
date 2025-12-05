@@ -3,7 +3,6 @@
 namespace App\Dtos;
 
 use App\Models\Product\Cart;
-use InvalidArgumentException;
 
 class CartDto
 {

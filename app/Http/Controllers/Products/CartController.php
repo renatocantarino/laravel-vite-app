@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use App\Services\Product\ICartService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -46,8 +44,6 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $userInfo = $this->getLoggerUserInfo();
-
-
 
         $cartProducts = $this->cartService->getByUserIdWithItems($userInfo['id']);       
         return view('cart.checkout', compact('cartProducts', 'userInfo'));

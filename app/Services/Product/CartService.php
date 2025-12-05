@@ -66,13 +66,10 @@ class CartService implements ICartService
 
     public function remove(int $userId, int $idProduct): bool
     {
-
         $deleted = $this->cartRepository->remove($idProduct);
         Cache::forget("cart_count_user_{$userId}");
 
         return $deleted;
-
-
     }
 
     // public function checkout(CartDto $cartDto): CartDto

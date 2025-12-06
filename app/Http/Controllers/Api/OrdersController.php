@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Product\Cart;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+use App\Services\Product\IOrderService;
 
 
 class OrdersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected IOrderService $orderService;
+
+    public function __construct(IOrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
     public function index()
     {
-        return [
-            'message' => 'API via Controller funcionando!'
-        ];
+       return response()->json($this->orderService->getAll());
     }
 
     /**

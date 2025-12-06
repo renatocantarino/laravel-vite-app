@@ -7,7 +7,7 @@ use App\Models\Product\Cart;
 class CartDto
 {
     public function __construct(
-        public string $id,
+        public ?string $id,
         public int $user_id,
         public float $subtotal,
         public string $status,

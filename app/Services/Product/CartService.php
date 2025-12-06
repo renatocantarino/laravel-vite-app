@@ -2,7 +2,6 @@
 
 namespace App\Services\Product;
 
-use App\Models\Product\Cart;
 use App\Models\Product\CartItem;
 use App\Dtos\CartDto;
 use App\Dtos\CartItemDto;
@@ -22,14 +21,17 @@ class CartService implements ICartService
 
     public function create(Request $request): CartDto
     {
+        $cartRequest = new CartDto(
+            id: null, 
+            user_id: $request->user_id,
+            subtotal: $request->qty * $request->price, 
+            tax: $request->tax ?? 0, 
+            status: 'open' 
+        );
 
-        $cartRequest = new Cart([
-            "user_id" => $request->user_id,
-            "subtotal" => $request->qty * $request->price,
-            "status" => 'open'
-        ]);
+        $cart = CartDto::toModel($cartRequest);
 
-        $cartCreated = $this->cartRepository->create($cartRequest);
+        $cartCreated = $this->cartRepository->create($cart);
         return CartDto::fromModel($cartCreated);
     }
 
@@ -71,12 +73,4 @@ class CartService implements ICartService
 
         return $deleted;
     }
-
-    // public function checkout(CartDto $cartDto): CartDto
-    // {                
-    //    $closedCart = CartDto::toModel($cartDto);
-    //    $closedCart = $this->cartRepository->close($closedCart);
-    //    return CartDto::fromModel($closedCart);
-    // }
-
 }

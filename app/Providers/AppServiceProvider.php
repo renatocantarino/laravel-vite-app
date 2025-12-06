@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Product\CartRepository;
 use App\Repositories\Product\ICartRepository;
+use App\Repositories\Product\IOrdersRepository;
+use App\Repositories\Product\OrdersRepository;
 use App\Repositories\Product\IProductRepository;
 use App\Repositories\Product\ProductsRepository;
 use App\Services\Product\CartService;
@@ -15,6 +17,8 @@ use App\Repositories\Product\ICategoryRepository;
 use App\Repositories\Product\CategoryRepository;
 use App\Services\Product\ICategoryService;
 use App\Services\Product\CategoryService;
+use App\Services\Product\IOrderService;
+use App\Services\Product\OrderService;
 use Illuminate\Support\Facades\View;
 use App\Http\ViewComposers\CartComposer;
 
@@ -28,11 +32,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ICategoryRepository::class, CategoryRepository::class);
         $this->app->bind(IProductRepository::class, ProductsRepository::class);
         $this->app->bind(ICartRepository::class, CartRepository::class);
+        $this->app->bind(IOrdersRepository::class, OrdersRepository::class);
 
         // Service bindings
         $this->app->bind(ICategoryService::class, CategoryService::class);
         $this->app->bind(IProductsService::class, ProductsService::class);
         $this->app->bind(ICartService::class, CartService::class);
+        $this->app->bind(IOrderService::class, OrderService::class);
 
 
         View::composer('*', CartComposer::class);

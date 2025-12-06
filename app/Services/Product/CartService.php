@@ -22,11 +22,11 @@ class CartService implements ICartService
     public function create(Request $request): CartDto
     {
         $cartRequest = new CartDto(
-            id: null, 
+            id: null,
             user_id: $request->user_id,
-            subtotal: $request->qty * $request->price, 
-            tax: $request->tax ?? 0, 
-            status: 'open' 
+            subtotal: $request->qty * $request->price,
+            tax: $request->tax ?? 0,
+            status: 'open'
         );
 
         $cart = CartDto::toModel($cartRequest);
@@ -66,9 +66,9 @@ class CartService implements ICartService
         return $this->cartRepository->countByUserId($userId);
     }
 
-    public function remove(int $userId, int $idProduct): bool
+    public function remove(int $userId, string $idProduct): bool
     {
-        $deleted = $this->cartRepository->remove($idProduct);
+        $deleted = $this->cartRepository->remove($userId, $idProduct);
         Cache::forget("cart_count_user_{$userId}");
 
         return $deleted;

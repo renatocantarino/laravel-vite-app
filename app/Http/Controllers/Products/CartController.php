@@ -35,8 +35,9 @@ class CartController extends Controller
         return view('cart.view', compact('cartProducts'));
     }
 
-    public function removeFromCart(int $idProduct)
-    {        
+    public function removeFromCart(string $idProduct)
+    {       
+        
         $this->cartService->remove($this->getLoggerUserInfo()['id'],$idProduct);
         return Redirect::route('cart.view')->with(['success' => 'Product removed from cart  successfully']);
     }

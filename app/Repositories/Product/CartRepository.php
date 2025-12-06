@@ -72,9 +72,23 @@ class CartRepository implements ICartRepository
     }
 
 
-    public function remove(int $id): bool
+    public function remove(int $idUser, string $id): bool
     {
-        return CartItem::where('id', $id)->delete() > 0;
+        $cart = $this->getCartOpenById($idUser);
+        if (!$cart) {
+            return false;
+        }
+
+        $wasDeleted = CartItem::where('cart_item_id', $id)
+            ->where('cart_id', $cart->cart_id)
+            ->delete() > 0;
+
+        if ($wasDeleted) {
+            $this->updateCartTotal($cart->cart_id);
+        }
+
+        return $wasDeleted;
+
     }
 
     public function checkout(Cart $cart): Cart

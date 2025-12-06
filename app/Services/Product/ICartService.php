@@ -17,7 +17,7 @@ interface ICartService
 
     public function countByUserId(int $userId): int;
 
-    public function remove(int $userId, int $idProduct): bool;
+    public function remove(int $userId, string $idProduct): bool;
 
     //public function checkout(CartDto $cart): CartDto;
 }

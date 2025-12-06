@@ -11,7 +11,7 @@ interface ICartRepository
 
     public function addItem(CartItem $item): CartItem;
 
-    public function remove(int $idProduct): bool;
+    public function remove(int $idUser, string $idProduct): bool;
 
     public function checkout(Cart $cart): Cart;
 

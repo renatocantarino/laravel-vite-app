@@ -10,7 +10,6 @@ class OrdersRepository implements IOrdersRepository
 {
     public function create(Order $order): Order
     {
-
         $order->save();
         return $order->fresh();
     }

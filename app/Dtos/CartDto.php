@@ -14,15 +14,9 @@ class CartDto
         public float $tax = 0.0,
         public ?float $cartTotal = null,
         public array $cartItems = []
-    ) {
-        
-        $this->calculateCartTotal();
-    }
- 
-    private function calculateCartTotal(): void
-    {
-        $this->cartTotal = $this->subtotal + $this->tax;
-    }
+    ) {     }
+
+
 
     public static function fromModel(Cart $cart): self
     {
@@ -30,13 +24,17 @@ class CartDto
             fn($item) => CartItemDto::fromModel($item)
         )->toArray();
 
+        $tax_cart = $cart->subtotal * 0.2;
+        $orderTotal = $cart->subtotal + $tax_cart;
+
         return new self(
             id: $cart->cart_id,
             user_id: $cart->user_id,
             subtotal: $cart->subtotal,
             status: $cart->status,
-            tax: $cart->tax ?? ($cart->subtotal * 0.15), 
-            cartItems: $cartItemsDto            
+            tax: $tax_cart,
+            cartTotal: $orderTotal,
+            cartItems: $cartItemsDto
         );
     }
 
@@ -47,7 +45,7 @@ class CartDto
             'user_id' => $cartDto->user_id,
             'subtotal' => $cartDto->subtotal,
             'tax' => $cartDto->tax,
-            'status' => $cartDto->status,            
+            'status' => $cartDto->status,
         ]);
     }
 

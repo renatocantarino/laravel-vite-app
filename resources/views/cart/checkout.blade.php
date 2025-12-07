@@ -22,45 +22,55 @@
                     <div class="col-xs-12 col-sm-7">
                         <h5 class="mb-3">BILLING DETAILS</h5>
                         <!-- Bill Detail of the Page -->
-                        <form action="#" class="bill-detail">
+                        <form method="POST" action="{{ route('checkout.start') }}" class="bill-detail">
                             <fieldset>
+                                @csrf
                                 <div class="form-group row">
                                     <div class="col">
                                         <input class="form-control" value="{{ $userInfo['name'] }}" placeholder="Name"
-                                            type="text" readonly>
+                                            type="text" name="userName" readonly>
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" placeholder="Last Name" type="text">
+                                        <input class="form-control"  name="lastName" placeholder="Last Name" type="text">
                                     </div>
                                 </div>
+
+                                 <input type="hidden" name="cartId" value="{{ $cartProducts->id }}">
+
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Company Name" type="text">
+                                    <textarea class="form-control"  name="Address" placeholder="Address"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Address"></textarea>
+                                    <input class="form-control" name="city"  placeholder="Town / City" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Town / City" type="text">
+                                    <input class="form-control" name="country" placeholder="State / Country" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="State / Country" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Postcode / Zip" type="text">
+                                    <input class="form-control" name="zipcode" placeholder="Postcode / Zip" type="text">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col">
                                         <input class="form-control" value="{{ $userInfo['email'] }}"
-                                            placeholder="Email Address" type="email" readonly>
+                                            placeholder="Email Address" name="email" type="email" readonly>
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" placeholder="Phone Number" type="tel">
+                                        <input class="form-control" name="phone" placeholder="Phone Number" type="tel">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Order Notes"></textarea>
+                                    <textarea class="form-control" name="orderNotes" placeholder="Order Notes"></textarea>
                                 </div>
+
+                                <p class="text-right mt-3">
+                                    <input checked="" type="checkbox"> I’ve read &amp; accept the <a href="#">terms &amp;
+                                        conditions</a>
+                                </p>
+                                <button class="btn btn-primary float-right" name="submit" type="submit">PROCEED TO CHECKOUT
+                                    <i class="fa fa-check"></i>
+
+                                </button>
                             </fieldset>
                         </form>
                         <!-- Bill Detail of the Page end -->
@@ -84,10 +94,10 @@
                                                     {{$item->name  }} x {{ $item->qty }}
                                                 </td>
                                                 <td class="text-right">
-                                                    {{$item->price  }}
+                                                    {{ number_format($item->price, 2, '.', '') }}
                                                 </td>
                                                 <td class="text-right">
-                                                    {{$item->subtotal  }}
+                                                    {{ number_format($item->subtotal, 2, '.', '')  }}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -99,11 +109,10 @@
                                                 <strong>Cart Subtotal</strong>
                                             </td>
                                             <td class="text-right">
-
                                             </td>
 
                                             <td class="text-right">
-                                                {{ $cartProducts->subtotal }}
+                                                {{  number_format($cartProducts->subtotal, 2, '.', '') }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -114,7 +123,7 @@
 
 
                                             <td class="text-right">
-                                                {{ $cartProducts->tax}}
+                                                {{  number_format($cartProducts->tax, 2, '.', '') }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -123,7 +132,7 @@
                                             </td>
                                             <td class="text-right"></td>
                                             <td class="text-right">
-                                                <strong> {{ $cartProducts->cartTotal}}</strong>
+                                                <strong> {{  number_format($cartProducts->cartTotal, 2, '.', '') }}</strong>
                                             </td>
                                         </tr>
                                     </tfooter>
@@ -132,11 +141,7 @@
 
 
                         </div>
-                        <p class="text-right mt-3">
-                            <input checked="" type="checkbox"> I’ve read &amp; accept the <a href="#">terms &amp;
-                                conditions</a>
-                        </p>
-                        <a href="#" class="btn btn-primary float-right">PROCEED TO CHECKOUT <i class="fa fa-check"></i></a>
+
                         <div class="clearfix">
                         </div>
                     </div>

@@ -19,32 +19,9 @@ class CartRepository implements ICartRepository
         return $cart->fresh();
     }
 
-    public function addItem(CartItem $item): CartItem
+    public function updateCartTotal($cartId): void
     {
-
-        $existingItem = CartItem::where('cart_id', $item->cart_id)
-            ->where('prod_id', $item->prod_id)
-            ->first();
-
-        if ($existingItem) {
-            $existingItem->qty += $item->qty;
-            $existingItem->subtotal = $existingItem->price * $existingItem->qty;
-            $existingItem->save();
-
-            $item = $existingItem;
-        } else {
-            $item->save();
-        }
-
-
-        $this->updateCartTotal($item->cart_id);
-        return $item->fresh();
-    }
-
-
-    private function updateCartTotal($cartId)
-    {
-        $total = CartItem::where('cart_id', $cartId)->sum('subtotal');
+        $total = CartItem::where('cart_id', $cartId)->sum('subtotal');        
         Cart::where('cart_id', $cartId)->update(['subtotal' => $total]);
     }
 
@@ -72,25 +49,6 @@ class CartRepository implements ICartRepository
     }
 
 
-    public function remove(int $idUser, string $id): bool
-    {
-        $cart = $this->getCartOpenById($idUser);
-        if (!$cart) {
-            return false;
-        }
-
-        $wasDeleted = CartItem::where('cart_item_id', $id)
-            ->where('cart_id', $cart->cart_id)
-            ->delete() > 0;
-
-        if ($wasDeleted) {
-            $this->updateCartTotal($cart->cart_id);
-        }
-
-        return $wasDeleted;
-
-    }
-
     public function checkout(Cart $cart): Cart
     {
         $this->update($cart->id, ['status' => 'closed']);
@@ -98,9 +56,4 @@ class CartRepository implements ICartRepository
         return $cart;
     }
 
-    // public function update(int $id, array $data): bool
-    // {
-    //     $affected = Cart::where('id', $id)->update($data);
-    //     return $affected > 0;
-    // }
 }

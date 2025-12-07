@@ -23,16 +23,14 @@ class CartComposer
 
         if (Auth::check()) {
             $userId = Auth::id();            
-            $cacheKey = "cart_count_user_{$userId}";
-            $userName = Auth::user()->name;  
-                        
-            $countCartItems = Cache::remember($cacheKey, 3600, function () use ($userId) {
-                return $this->cartService->countByUserId($userId);
-            });
+            $userName = Auth::user()->name;
+
+            $countCartItems = $this->cartService->countByUserId($userId);
         }
 
-       $view->with([
-                    'countCartItems' => $countCartItems,
-                    'userName' => $userName]);
+        $view->with([
+            'countCartItems' => $countCartItems,
+            'userName' => $userName
+        ]);
     }
 }

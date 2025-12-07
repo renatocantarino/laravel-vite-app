@@ -6,6 +6,7 @@ use App\Models\Product\CartItem;
 use App\Dtos\CartDto;
 use App\Dtos\CartItemDto;
 use App\Repositories\Product\ICartRepository;
+use App\Repositories\Product\ICartItemRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,10 +14,14 @@ use Illuminate\Support\Facades\Cache;
 class CartService implements ICartService
 {
     protected ICartRepository $cartRepository;
+    protected ICartItemRepository $cartItemRepository;
 
-    public function __construct(ICartRepository $cartRepository)
-    {
+    public function __construct(
+        ICartRepository $cartRepository,
+        ICartItemRepository $cartItemRepository
+    ) {
         $this->cartRepository = $cartRepository;
+        $this->cartItemRepository = $cartItemRepository;
     }
 
     public function create(Request $request): CartDto
@@ -48,9 +53,11 @@ class CartService implements ICartService
             "subtotal" => $request->qty * $request->price
         ]);
 
-        Cache::forget("cart_count_user_{$request->userId}");
 
-        $itemAdded = $this->cartRepository->addItem($cartItem);
+
+        $itemAdded = $this->cartItemRepository->addItem($cartItem);
+        $this->cartRepository->updateCartTotal($cartId);
+
         return CartItemDto::fromModel($itemAdded);
 
     }
@@ -68,8 +75,15 @@ class CartService implements ICartService
 
     public function remove(int $userId, string $idProduct): bool
     {
-        $deleted = $this->cartRepository->remove($userId, $idProduct);
-        Cache::forget("cart_count_user_{$userId}");
+
+        $cartOpen = $this->cartRepository->getCartOpenById($userId);
+        if (!$cartOpen) {
+            throw new \InvalidArgumentException("No open cart found for user ID: $userId");
+        }
+
+
+        $deleted = $this->cartItemRepository->removeItem($cartOpen->cart_id, $idProduct);
+        $this->cartRepository->updateCartTotal($cartOpen->cart_id);
 
         return $deleted;
     }

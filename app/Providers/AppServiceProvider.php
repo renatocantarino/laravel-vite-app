@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Product\CartRepository;
 use App\Repositories\Product\ICartRepository;
+use App\Repositories\Product\CartItemRepository;
+use App\Repositories\Product\ICartItemRepository;
 use App\Repositories\Product\IOrdersRepository;
 use App\Repositories\Product\OrdersRepository;
 use App\Repositories\Product\IProductRepository;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ICategoryRepository::class, CategoryRepository::class);
         $this->app->bind(IProductRepository::class, ProductsRepository::class);
         $this->app->bind(ICartRepository::class, CartRepository::class);
+        $this->app->bind(ICartItemRepository::class, CartItemRepository::class);
         $this->app->bind(IOrdersRepository::class, OrdersRepository::class);
 
         // Service bindings

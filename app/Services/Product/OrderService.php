@@ -18,9 +18,7 @@ class OrderService implements IOrderService
 
     public function create(Request $request): Order
     {
-
         $orderRequest = new OrderDto(
-            id: null,
             cart_id: $request->cart_id,
             full_name: $request->full_name,
             address: $request->address,

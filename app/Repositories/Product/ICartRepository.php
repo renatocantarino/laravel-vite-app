@@ -9,7 +9,7 @@ interface ICartRepository
 {
     public function create(Cart $cart): Cart;
 
-    public function checkout(Cart $cart): Cart;
+    public function checkout(string $cartId): bool;
 
     public function countByUserId(int $userId): int;
 
@@ -20,11 +20,3 @@ interface ICartRepository
     public function updateCartTotal($cartId): void;
 
 }
-
-
-
-
-
-
-
-

@@ -49,11 +49,10 @@ class CartRepository implements ICartRepository
     }
 
 
-    public function checkout(Cart $cart): Cart
+    public function checkout(string $cartId): bool
     {
-        $this->update($cart->id, ['status' => 'closed']);
-        $cart->refresh();
-        return $cart;
+        $this->update($cartId, ['status' => 'closed']);
+        return true;        
     }
 
 }

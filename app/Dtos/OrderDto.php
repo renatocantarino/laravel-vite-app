@@ -7,8 +7,8 @@ use App\Models\Product\Order;
 class OrderDto
 {
 
-    public function __construct(
-        public string $id,
+    public function __construct(      
+        public ?int $id = null,  
         public string $cart_id,
         public string $full_name,
         public string $address,

@@ -87,4 +87,9 @@ class CartService implements ICartService
 
         return $deleted;
     }
+
+    public function checkout(string $cartId): bool
+    {
+        return $this->cartRepository->checkout($cartId);
+    }
 }

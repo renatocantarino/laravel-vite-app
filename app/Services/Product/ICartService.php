@@ -19,5 +19,5 @@ interface ICartService
 
     public function remove(int $userId, string $itemId): bool;
 
-    //public function checkout(CartDto $cart): CartDto;
+    public function checkout(string $cartId): bool;
 }

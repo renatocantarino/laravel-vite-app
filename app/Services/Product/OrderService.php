@@ -4,7 +4,6 @@ namespace App\Services\Product;
 use App\Dtos\OrderDto;
 use App\Repositories\Product\IOrdersRepository;
 use Illuminate\Http\Request;
-use App\Models\Product\Order;
 use Illuminate\Support\Collection;
 
 class OrderService implements IOrderService
@@ -16,25 +15,24 @@ class OrderService implements IOrderService
         $this->repository = $repository;
     }
 
-    public function create(Request $request): Order
+    public function create(Request $request): OrderDto
     {
+        $data = $request->all();              
         $orderRequest = new OrderDto(
-            cart_id: $request->cart_id,
-            full_name: $request->full_name,
-            address: $request->address,
-            city: $request->city,
-            state: $request->state,
-            zipcode: $request->zipcode,
-            email: $request->email,
-            phone_number: $request->phone_number,
-            notes: $request->notes,
-            status: 'pending',
+            id: null,
+            cart_id: $data['cartId'] ?? null,
+            full_name: "{$data['userName']} {$data['lastName']}" ?? null,
+            address: $data['Address'] ?? null,
+            city: $data['city'] ?? null,
+            state: $data['country'] ?? null,
+            zipcode: $data['zipcode'] ?? null,
+            email: $data['email'] ?? null,
+            phone_number: $data['phone'] ?? null,
+            notes: $data['orderNotes'] ?? null,
+            status: $data['status'] ?? 'pending',
         );
-
-
-
-        return $this->repository->create(OrderDto::toModel($orderRequest));
-
+        $orderCreated = $this->repository->create(OrderDto::toModel($orderRequest));
+        return OrderDto::fromModel($orderCreated);
     }
 
 

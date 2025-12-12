@@ -7,8 +7,8 @@ use App\Models\Product\Order;
 class OrderDto
 {
 
-    public function __construct(      
-        public ?int $id = null,  
+    public function __construct(
+        public ?int $id = null,
         public string $cart_id,
         public string $full_name,
         public string $address,
@@ -23,9 +23,8 @@ class OrderDto
     ) {
     }
 
-    public static function fromModel(Order $order): self
+    public static function fromModel(Order $order): OrderDto
     {
-
         return new self(
             id: $order->id,
             cart_id: $order->cart_id,
@@ -45,6 +44,7 @@ class OrderDto
     public static function toModel(OrderDto $orderDto): Order
     {
         $order = new Order([
+            "id"=> $orderDto->id,
             'cart_id' => $orderDto->cart_id,
             'full_name' => $orderDto->full_name,
             'address' => $orderDto->address,
@@ -54,9 +54,9 @@ class OrderDto
             'email' => $orderDto->email,
             'phone_number' => $orderDto->phone_number,
             'notes' => $orderDto->notes,
-            'status' => $orderDto->status,            
+            'status' => $orderDto->status,
         ]);
-
+       
         return $order;
     }
 }

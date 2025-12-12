@@ -36,6 +36,7 @@
                                 </div>
 
                                  <input type="hidden" name="cartId" value="{{ $cartProducts->id }}">
+                                 <input type="hidden" name="cart_total" value="{{ $cartProducts->cartTotal }}">
 
                                 <div class="form-group">
                                     <textarea class="form-control"  name="Address" placeholder="Address"></textarea>

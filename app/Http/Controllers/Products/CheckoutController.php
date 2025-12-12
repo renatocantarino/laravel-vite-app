@@ -31,9 +31,14 @@ class CheckoutController extends Controller
         $createdOrder = $this->orderService->create($request);
         if (!$createdOrder) {
             throw new \Exception("Error creating order");
-        }
+        }        
+        $this->cartService->checkout($createdOrder->cart_id);
+        return Redirect::route('checkout.pay');
+    }
 
-        $this->cartService->checkout($request->cart_id);
-        return Redirect::route('cart.pay');
+    public function pay()
+    {
+        return view('cart.pay');
+
     }
 }

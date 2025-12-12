@@ -21,4 +21,5 @@ Route::delete('cart/remove/{id}', [App\Http\Controllers\Products\CartController:
 
 Route::post('cart/prepare-checkout', [App\Http\Controllers\Products\CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('checkout/start', [App\Http\Controllers\Products\CheckoutController::class, 'start'])->name('checkout.start');
+Route::get('checkout/pay', [App\Http\Controllers\Products\CheckoutController::class, 'pay'])->name('checkout.pay');
 

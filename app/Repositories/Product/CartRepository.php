@@ -51,8 +51,8 @@ class CartRepository implements ICartRepository
 
     public function checkout(string $cartId): bool
     {
-        $this->update($cartId, ['status' => 'closed']);
-        return true;        
+        Cart::where('cart_id', $cartId)->update(['status' => 'closed']);
+        return true; 
     }
 
 }

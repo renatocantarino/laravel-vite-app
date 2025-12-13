@@ -15,9 +15,9 @@ class OrderService implements IOrderService
         $this->repository = $repository;
     }
 
-    public function create(Request $request): OrderDto
+    public function create(array $data): OrderDto
     {
-        $data = $request->all();              
+        
         $orderRequest = new OrderDto(
             id: null,
             cart_id: $data['cartId'] ?? null,
@@ -29,7 +29,7 @@ class OrderService implements IOrderService
             email: $data['email'] ?? null,
             phone_number: $data['phone'] ?? null,
             notes: $data['orderNotes'] ?? null,
-            status: $data['status'] ?? 'pending',
+            status: $data['status'] ?? 'pending'            
         );
         $orderCreated = $this->repository->create(OrderDto::toModel($orderRequest));
         return OrderDto::fromModel($orderCreated);

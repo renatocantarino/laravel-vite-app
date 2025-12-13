@@ -8,7 +8,7 @@ use App\Dtos\OrderDto;
 
 interface IOrderService
 {
-    public function create(Request $request): OrderDto;
+    public function create(array $data): OrderDto;
 
     public function getAll(): Collection;    
 }

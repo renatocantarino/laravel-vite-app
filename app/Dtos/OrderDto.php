@@ -18,7 +18,7 @@ class OrderDto
         public string $email,
         public string $phone_number,
         public string $notes,
-        public string $status,
+        public string $status       
 
     ) {
     }
@@ -36,7 +36,7 @@ class OrderDto
             email: $order->email,
             phone_number: $order->phone_number,
             notes: $order->notes,
-            status: $order->status,
+            status: $order->status            
         );
 
     }
@@ -44,7 +44,7 @@ class OrderDto
     public static function toModel(OrderDto $orderDto): Order
     {
         $order = new Order([
-            "id"=> $orderDto->id,
+            "id" => $orderDto->id,
             'cart_id' => $orderDto->cart_id,
             'full_name' => $orderDto->full_name,
             'address' => $orderDto->address,
@@ -56,7 +56,7 @@ class OrderDto
             'notes' => $orderDto->notes,
             'status' => $orderDto->status,
         ]);
-       
+
         return $order;
     }
 }

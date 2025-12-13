@@ -28,12 +28,15 @@ class CheckoutController extends Controller
     public function start(Request $request)
     {
 
-        $createdOrder = $this->orderService->create($request);
+        $fields = $request->all();
+        $createdOrder = $this->orderService->create($fields);
         if (!$createdOrder) {
             throw new \Exception("Error creating order");
         }        
-        $this->cartService->checkout($createdOrder->cart_id);
-        return Redirect::route('checkout.pay');
+        $this->cartService->checkout($createdOrder->cart_id);   
+        
+        $ordertotal = $fields['orderTotal'] ?? 0.0;
+        return view('cart.pay', compact('ordertotal'));
     }
 
     public function pay()

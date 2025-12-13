@@ -53,7 +53,7 @@ class OrderDto
             'zipcode' => $orderDto->zipcode,
             'email' => $orderDto->email,
             'phone_number' => $orderDto->phone_number,
-            'notes' => $orderDto->notes,
+            'notes' => $orderDto->notes ?? '',
             'status' => $orderDto->status,
         ]);
 

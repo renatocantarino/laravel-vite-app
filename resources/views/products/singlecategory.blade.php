@@ -3,18 +3,9 @@
 @section('content')
 
     <div id="page-content" class="page-content">
-        <div class="banner">
-            <div class="jumbotron jumbotron-bg text-center rounded-0" style="margin-top: -25px;background-image: url('{{asset('assets/img/bg-header.jpg')}}');">
-                <div class="container">
-                    <h1 class="pt-5">
-                      Shop Page
-                    </h1>
-                    <p class="lead">
-                        Save time and leave the groceries to us.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <x-banner-header title="Category Page">
+            Save time and leave the groceries to us.
+        </x-banner-header>
 
         <section id="most-wanted">
             <div class="container">
@@ -33,25 +24,27 @@
                                             </div>
                                             <div class="card-badge">
                                                 <div class="card-badge-container left">
-                                            <span class="badge badge-primary">
-                                                Até dez/2028
-                                            </span>
                                                     <span class="badge badge-primary">
-                                                20% OFF
-                                            </span>
+                                                        Até dez/2028
+                                                    </span>
+                                                    <span class="badge badge-primary">
+                                                        20% OFF
+                                                    </span>
                                                 </div>
-                                                <img src="{{asset('assets/img/'.$product->image)}}" alt="Card image 2" class="card-img-top img-fluid"
-                                                     style="object-fit: cover; width: 100%; height: 200px;">
+                                                <img src="{{asset('assets/img/' . $product->image)}}" alt="Card image 2"
+                                                    class="card-img-top img-fluid"
+                                                    style="object-fit: cover; width: 100%; height: 200px;">
                                             </div>
                                             <div class="card-body">
                                                 <h4 class="card-title">
-                                                    <a href="{{route('single.product',$product->id)}}">{{$product->name}}</a>
+                                                    <a href="{{route('single.product', $product->id)}}">{{$product->name}}</a>
                                                 </h4>
                                                 <div class="card-price">
                                                     <span class="reguler">R$ {{$product->price}}</span>
                                                 </div>
-                                                <a href="{{route('single.product',$product->id)}}" class="btn btn-block btn-primary">
-                                                  Comprar
+                                                <a href="{{route('single.product', $product->id)}}"
+                                                    class="btn btn-block btn-primary">
+                                                    Comprar
                                                 </a>
 
                                             </div>

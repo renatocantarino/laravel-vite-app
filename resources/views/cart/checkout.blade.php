@@ -2,19 +2,9 @@
 
 @section('content')
     <div id="page-content" class="page-content">
-        <div class="banner">
-            <div class="jumbotron jumbotron-bg text-center rounded-0"
-                style="margin-top: -25px;background-image: url('{{asset('assets/img/bg-header.jpg')}}');">
-                <div class="container">
-                    <h1 class="pt-5">
-                        Checkout
-                    </h1>
-                    <p class="lead">
-                        Save time and leave the groceries to us.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <x-banner-header title="Checkout Page">
+            Save time and leave the groceries to us.
+        </x-banner-header>
 
         <section id="checkout">
             <div class="container">
@@ -31,18 +21,18 @@
                                             type="text" name="userName" readonly>
                                     </div>
                                     <div class="col">
-                                        <input class="form-control"  name="lastName" placeholder="Last Name" type="text">
+                                        <input class="form-control" name="lastName" placeholder="Last Name" type="text">
                                     </div>
                                 </div>
 
-                                 <input type="hidden" name="cartId" value="{{ $cartProducts->id }}">
-                                 <input type="hidden" name="orderTotal" value="{{ $cartProducts->cartTotal }}">
+                                <input type="hidden" name="cartId" value="{{ $cartProducts->id }}">
+                                <input type="hidden" name="orderTotal" value="{{ $cartProducts->cartTotal }}">
 
                                 <div class="form-group">
-                                    <textarea class="form-control"  name="Address" placeholder="Address"></textarea>
+                                    <textarea class="form-control" name="Address" placeholder="Address"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="city"  placeholder="Town / City" type="text">
+                                    <input class="form-control" name="city" placeholder="Town / City" type="text">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="country" placeholder="State / Country" type="text">
@@ -139,10 +129,7 @@
                                     </tfooter>
                                 </table>
                             </div>
-
-
                         </div>
-
                         <div class="clearfix">
                         </div>
                     </div>
